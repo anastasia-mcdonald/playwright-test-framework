@@ -1,16 +1,11 @@
 import { test, expect } from '@playwright/test';
+import { AddRemoveElementsPage } from '../pages/add-remove-elements.page';
 
 test('should display Delete button after adding element', async ({ page }) => {
+  const addRemovePage = new AddRemoveElementsPage(page);
 
-  // Open page
-  await page.goto('https://the-internet.herokuapp.com/add_remove_elements/');
+  await addRemovePage.goto();
+  await addRemovePage.addElement();
 
-  // Click button
-  await page.getByRole('button', { name: 'Add Element' }).click();
-
-  // Assert Delete button appears
-  await expect(
-    page.getByRole('button', { name: 'Delete' })
-  ).toBeVisible();
-
+  await expect(addRemovePage.deleteButton).toBeVisible();
 });
