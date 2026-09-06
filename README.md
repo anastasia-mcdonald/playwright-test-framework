@@ -1,6 +1,6 @@
 # Playwright Test Framework
 
-A personal project demonstrating automated testing with [Playwright](https://playwright.dev/) and TypeScript. It uses [the-internet.herokuapp.com](https://the-internet.herokuapp.com/) as a test target to showcase test automation patterns and best practices, starting with UI testing like dynamically added and removed elements.
+A personal project demonstrating automated testing with [Playwright](https://playwright.dev/) and TypeScript. It uses [the-internet.herokuapp.com](https://the-internet.herokuapp.com/) and [JSONPlaceholder](https://jsonplaceholder.typicode.com/) as test targets to showcase test automation patterns and best practices, starting with UI and API testing.
 
 ## Why Playwright?
 
@@ -22,6 +22,7 @@ Playwright was chosen because it:
 ### Test coverage
 
 - **Add/Remove Elements** — verifies that a Delete button appears after adding an element on the-internet.herokuapp.com.
+- **Posts API** — GET a post by id, create a post (201), and 404 handling for missing resources, using Playwright's `request` fixture against JSONPlaceholder.
 
 ### Test configuration (`playwright.config.ts`)
 
@@ -45,6 +46,8 @@ Playwright was chosen because it:
 npm install
 npm init playwright@latest      # official interactive setup wizard: installs Playwright and browsers, generates config
 npx playwright test             # run all tests (all 3 browsers)
+npx playwright test ui          # run the UI suite only
+npx playwright test api         # run the API suite only
 npx playwright test --project=chromium   # single browser
 npx playwright show-report      # open the HTML report
 npx playwright test --ui        # open UI mode: watch and debug tests interactively
@@ -53,5 +56,5 @@ npx playwright test --ui        # open UI mode: watch and debug tests interactiv
 ## Future Improvements
 
 - [ ] Add more tests for the-internet.herokuapp.com (form authentication, key presses, drag & drop, dynamic loading)
-- [ ] API testing with Playwright's `request` fixture to complement UI tests
+- [x] API testing with Playwright's `request` fixture to complement UI tests
 - [ ] Visual regression testing with screenshot comparisons
