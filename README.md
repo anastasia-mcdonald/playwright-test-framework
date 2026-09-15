@@ -55,6 +55,7 @@ npx playwright test --ui        # open UI mode: watch and debug tests interactiv
 
 ## Future Improvements
 
-- [ ] Add more tests for the-internet.herokuapp.com (form authentication, key presses, drag & drop, dynamic loading)
-- [x] API testing with Playwright's `request` fixture to complement UI tests
-- [ ] Visual regression testing with screenshot comparisons
+- Expand UI coverage with authentication and form validation scenarios
+- Add reusable Playwrite fixtures for test data and common setup
+- Add accessibility testing
+- Add visual regression testing with screenshot comparisons
