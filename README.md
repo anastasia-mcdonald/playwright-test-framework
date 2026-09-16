@@ -52,7 +52,7 @@ Playwright was chosen because it:
 
 ## Getting Started
 
-Credentials for the login suite are read from environment variables — create a `.env` file in the repo root with `TEST_USERNAME` and `TEST_PASSWORD` (missing variables fail fast with a clear error):
+Credentials for the login suite are read from environment variables — create a `.env` file in the repo root with `TEST_USERNAME` and `TEST_PASSWORD`:
 
 ```dotenv
 TEST_USERNAME=your_username
