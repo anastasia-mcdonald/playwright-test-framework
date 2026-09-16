@@ -16,12 +16,14 @@ Playwright was chosen because it:
 
 ### Test structure
 
-- **Page Object Model** — locators and actions live in `pages/` (e.g. `AddRemoveElementsPage`), keeping test logic separated from UI details.
+- **Page Object Model** — locators and actions live in `pages/` (e.g. `AddRemoveElementsPage`, `LoginPage`), keeping test logic separated from UI details.
 - **Role-based locators** — elements are found by accessible role and name (`getByRole('button', { name: 'Add Element' })`), which doubles as an accessibility check.
+- **Test data module** — credentials and other test data live in `data/`, imported by specs instead of inlined literals.
 
 ### Test coverage
 
 - **Add/Remove Elements** — verifies that a Delete button appears after adding an element on the-internet.herokuapp.com.
+- **Login** — successful login with valid credentials, rejection with error messages for invalid username or password.
 - **Posts API** — GET a post by id, create a post (201), and 404 handling for missing resources, using Playwright's `request` fixture against JSONPlaceholder.
 
 ### Test configuration (`playwright.config.ts`)
@@ -31,6 +33,14 @@ Playwright was chosen because it:
 - Retries enabled on CI only (`retries: process.env.CI ? 2 : 0`)
 - Trace collected on first retry for debugging failures
 - HTML reporter for test results
+- Loads a git-ignored `.env` via `dotenv` for local credentials
+
+### Credentials & secrets
+
+- Credentials are never hardcoded or committed — tests read `process.env` through `data/credentials.ts`
+- Missing variables fail fast with a clear error at startup (`requireEnv`)
+- Locally: a git-ignored `.env` is loaded via `dotenv` from the config (see Getting Started)
+- In CI: passed as GitHub Actions repository secrets (`secrets.TEST_USERNAME`, `secrets.TEST_PASSWORD`) into the workflow
 
 ### Continuous integration
 
@@ -41,6 +51,13 @@ Playwright was chosen because it:
 - Uploads the HTML report as an artifact (retained 30 days)
 
 ## Getting Started
+
+Credentials for the login suite are read from environment variables — create a `.env` file in the repo root with `TEST_USERNAME` and `TEST_PASSWORD` (missing variables fail fast with a clear error):
+
+```dotenv
+TEST_USERNAME=your_username
+TEST_PASSWORD=your_password
+```
 
 ```bash
 npm install
@@ -55,7 +72,7 @@ npx playwright test --ui        # open UI mode: watch and debug tests interactiv
 
 ## Future Improvements
 
-- Expand UI coverage with authentication and form validation scenarios
-- Add reusable Playwrite fixtures for test data and common setup
+- Expand UI coverage with form validation scenarios
+- Add reusable Playwright fixtures for test data and common setup
 - Add accessibility testing
 - Add visual regression testing with screenshot comparisons
