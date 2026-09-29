@@ -9,8 +9,8 @@ Playwright was chosen because it:
 - **Supports all major browsers** — Chromium, Firefox, and WebKit are all configured as test projects in this repo, so the same tests run across browser engines.
 - **Auto-waits for elements** — no manual `sleep()` calls or flaky explicit waits; actions automatically wait for elements to be actionable.
 - **Has modern, readable selectors** — user-facing locators like `getByRole()` encourage tests that reflect how real users interact with the UI.
-- **All-in-one tooling** — built-in test runner, parallel execution, retries, trace viewer, and an HTML report, without needing to stitch together extra tools.
-- **Easy to run in CI** — official GitHub Actions setup with browser caching and report artifacts.
+- **Bundles all-in-one tooling** — built-in test runner, parallel execution, retries, trace viewer, and an HTML report, without stitching together extra tools.
+- **Runs easily in CI** — the official GitHub Actions setup handles browser caching and report artifacts.
 
 ## Implemented Features
 
@@ -19,6 +19,7 @@ Playwright was chosen because it:
 - **Page Object Model** — locators and actions live in `pages/` (e.g. `AddRemoveElementsPage`, `LoginPage`), keeping test logic separated from UI details.
 - **Role-based locators** — elements are found by accessible role and name (`getByRole('button', { name: 'Add Element' })`), which doubles as an accessibility check.
 - **Test data module** — credentials and other test data live in `data/`, imported by specs instead of inlined literals.
+- **Custom fixtures** — shared setup lives in `tests/fixtures/` and is injected into specs by name.
 
 ### Test coverage
 
@@ -73,6 +74,5 @@ npx playwright test --ui        # open UI mode: watch and debug tests interactiv
 ## Future Improvements
 
 - Expand UI coverage with form validation scenarios
-- Add reusable Playwright fixtures for test data and common setup
 - Add accessibility testing
 - Add visual regression testing with screenshot comparisons
